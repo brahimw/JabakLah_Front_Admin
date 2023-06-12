@@ -1,0 +1,97 @@
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-xxl-5 d-flex justify-content-center">
+          <div class="card login-form px-4 bg-opacity-25 bg-light rounded-4" logFormContainer>
+            <div class="card-body p-4">
+              <div class="p-4 pb-1 text-center fs-1 d-flex justify-content-center align-items-center">
+                <i class="bi bi-person-gear rounded-circle bg-light bg-opacity-25 d-flex justify-content-center align-items-center p-2" style="width: 100px; height: 100px;"></i>
+              </div>
+              <div class="mb-2 text-white text-center">
+                <h3>Connexion</h3>
+                <hr>
+              </div>
+              <div class="alert alert-danger bg-opacity-25 text-wrap" *ngIf="(LogIn.touched && !LogIn.valid) || (Password.touched && !Password.valid)">
+                <ul class="m-0 p-0 px-2 small fw-light">
+                <li *ngIf="LogIn.errors.required">
+                  Le champ Login est requis                    
+                </li>
+                <li *ngIf="LogIn.errors.pattern">
+                Format non valide pour le login Ex:JK150J89B5G123
+                </li>
+                <li *ngIf="LogIn.errors.minlength">
+                  Le champ Login a une longueur minimale de 10
+                </li>
+                <li *ngIf="Password.errors.required">
+                  Le champ mot de passe est requis
+                </li>
+                <li *ngIf="Password.errors.minlength">
+                  Le mot de passe doit contenir un minimum de 8 caractères et chiffres
+                </li>
+              </ul> 
+              </div>
+                                
+
+
+              <form #form="ngForm" (ngSubmit)="submitAdminLogInForm(form)">
+                <div class="row">
+                    <div class="form-floating mb-4 bg-opacity-25">
+                      <input 
+                       [(ngModel)]="admin.logIn" 
+                       #LogIn="ngModel" 
+                       name="login" type="text" 
+                       id="login" placeholder="Login" 
+                       class="form-control"
+                       required 
+                       minlength="5"
+                       maxlength="24" 
+                       pattern="[A-Z1-9a-z]+"/>
+                        <label class="form-label" for="login">
+                          Login
+                        </label>
+                     </div>
+                  </div>
+                
+  
+                <!-- Password input -->
+                <div class="form-floating mb-4 bg-opacity-25">
+                  <input type="password"
+                   id="password" 
+                   class="form-control" 
+                   [(ngModel)]="admin.password"  
+                   #Password="ngModel"
+                   name="password"  
+                   placeholder="mot de passe" 
+                   required is
+                   minlength="5" />
+                    <label class="form-label" for="password">
+                      Mot de passe
+                    </label>
+                  
+                </div>
+  
+                
+                
+                <!-- Submit button -->
+                <div class="d-grid gap-2">
+                <button type="submit" 
+                class="btn btn-light" 
+                id="btnLogin" 
+                
+                [disabled]="!(LogIn.valid && Password.valid)">
+                  Se connecter
+                </button>
+              </div>
+                  <div
+                    class="alert alert-danger my-1"
+                    role="alert"
+                    *ngIf="isLoginFailed" >
+                    Echec de connexion : {{ errorMessage }}
+                  </div>
+                
+              
+              </form>
+            </div>
+          </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->

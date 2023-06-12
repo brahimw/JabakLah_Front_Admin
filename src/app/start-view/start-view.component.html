@@ -1,0 +1,20 @@
+<section class="">
+  <div class="container py-3">
+    <div class="d-flex align-items-center p-3 my-3 text-dark rounded shadow-sm bg-light " >
+      <i class="bi bi-person-circle fs-1 me-2"></i>
+      <div class="lh-1">
+        <h1 class="h6 mb-0 lh-1">Bonjour {{currentAdmin.username}}</h1>
+        <small>Jeton d'acces : <code>{{ currentAdmin.accessToken}}</code></small>
+      </div>
+    </div>
+    <hr>
+    <div class="h-100">
+      <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Tableau de bord</h6>
+        <div class="d-flex text-muted p-5 fs-1 text-center">
+          A travers ce tableau de bord, vous pouvez gérer les agents 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

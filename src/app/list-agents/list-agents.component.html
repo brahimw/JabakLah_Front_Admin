@@ -1,0 +1,50 @@
+<header>
+    <nav-bar></nav-bar>
+</header>
+
+<div class="container">
+    <section class="">
+        <div class="container py-3">
+            <div class="d-flex align-items-center p-3 my-3 text-dark rounded shadow-sm bg-light">
+                <i class="bi bi-person-circle fs-1 me-2"></i>
+                <div class="lh-1">
+                    <h1 class="h6 mb-0 lh-1">Bonjour {{currentAdmin.username}}</h1>
+                    <small>Jeton d'accès : <code>{{ currentAdmin.accessToken}}</code></small>
+                </div>
+            </div>
+            <hr>
+            <div class="h-100">
+                <div class="my-3 p-3 bg-body rounded shadow-sm">
+                    <h6 class="border-bottom pb-2 mb-0">
+                        <i class="bi bi-person-fill-add"></i> Liste des agents
+                    </h6>
+                    <div class="py-2">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0" *ngFor="let agent of agents">
+                              <div class="card border-warning">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{agent.nom +" "+ agent.prenom}}</h5>
+                                  <div class="container">
+                                    <ul class="list-unstyled small">
+                                        <li><strong>Email : </strong> <span class="fw-light">{{agent.email}}</span></li>
+                                        <li><strong>Téléphone : </strong> <span class="fw-light">{{agent.numTel}}</span></li>
+                                        <li><strong>Date de naissance : </strong> <span class="fw-light">{{agent.dateNaissance}}</span></li>
+                                        <li><strong>Adresse : </strong> <span class="fw-light">{{agent.adresse}}</span></li>
+                                         <li><strong>Numéro de matriculation : </strong> <span class="fw-light">{{agent.numMatriculation}}</span></li>
+                                            <li><strong>Numéro de patente : </strong> <span class="fw-light">{{agent.numPattente}}</span></li>
+                                            <li><strong>Justificatif d'identité : </strong> <span class="fw-light">{{agent.pieceIdentite}}</span></li>
+                                            <li><strong>Numéro de la pièce d'identité : </strong> <span class="fw-light">{{agent.numPieceIdentite}}</span></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+<!--Main layout-->

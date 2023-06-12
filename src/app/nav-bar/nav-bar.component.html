@@ -1,0 +1,21 @@
+<div class="nav-scroller bg-white shadow-sm">
+<nav class="container-fluid nav bg-light justify-content-around" aria-label="Secondary navigation">
+  <a class="nav-link" href="#home" routerLink="/admin/home">
+    <i class="bi bi-speedometer2"></i>
+    Tableau de bord
+  </a>
+  <a class="nav-link" href="#addAgentForm" routerLink="/admin/addAgent">
+    <i class="bi bi-person-plus-fill"></i>
+    Ajouter un agent
+  </a>
+  <a class="nav-link" href="#listAgents" routerLink="/admin/listAgents">
+    <i class="bi bi-people-fill"></i>
+    Liste des agents
+  </a>
+ <div class="d-flex align-items-center">
+  <button href="#admin/logIn" (click)="logOutClicked()" id="allAgentsButton" class="btn-sm btn btn-outline-warning right-2">
+    Deconnexion
+  </button>
+ </div>
+</nav>
+</div>

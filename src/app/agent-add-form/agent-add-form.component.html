@@ -1,0 +1,263 @@
+<header>
+    <nav-bar></nav-bar>
+</header>
+
+<div class="container">
+    <section class="">
+        <div class="container py-3">
+            <div class="d-flex align-items-center p-3 my-3 text-dark rounded shadow-sm bg-light">
+                <i class="bi bi-person-circle fs-1 me-2"></i>
+                <div class="lh-1">
+                    <h1 class="h6 mb-0 lh-1">Bonjour {{currentAdmin.username}}</h1>
+                    <small>Jeton d'accès : <code>{{ currentAdmin.accessToken}}</code></small>
+                </div>
+            </div>
+            <hr>
+            <div class="h-100">
+                <div class="my-3 p-3 bg-body rounded shadow-sm">
+                    <h6 class="border-bottom pb-2 mb-0">
+                        <i class="bi bi-person-fill-add"></i> Ajouter un agent
+                    </h6>
+                    <div class="py-2">
+                        <div *ngIf="(FirstName.touched && !FirstName.valid) || (LastName.touched && !LastName.valid) || (IdType.touched) || (DateOfBirth.touched && !DateOfBirth.valid) || (AgentAdress.touched && !AgentAdress.valid) || (AgentEmail.touched && !AgentEmail.valid) || (AgentPhoneNumber.touched && !AgentPhoneNumber.valid) || (AgentCommerceId.touched && !AgentCommerceId.valid) || (AgentPatentNumber.touched && !AgentPatentNumber.valid) || (AgentAddFile.touched && !AgentAddFile.valid)">
+                            <div class="alert alert-danger">
+                              <ul class="m-0 p-0 px-2">
+                                <li *ngIf="(FirstName.touched && !FirstName.valid)">
+                                  <ng-container *ngIf="FirstName.errors">
+                                    <ng-container *ngIf="FirstName.errors.required">Le champ du prénom est obligatoire</ng-container>
+                                    <ng-container *ngIf="FirstName.errors.pattern">Format invalide pour le prénom</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="(LastName.touched && !LastName.valid)">
+                                  <ng-container *ngIf="LastName.errors">
+                                    <ng-container *ngIf="LastName.errors.required">Le champ du nom est obligatoire</ng-container>
+                                    <ng-container *ngIf="LastName.errors.pattern">Format invalide pour le nom de famille</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="IdType.touched && IdType.errors && IdType.errors.required">Veuillez spécifier le type de justification d'identité</li>
+                                <li *ngIf="(DateOfBirth.touched && !DateOfBirth.valid) && DateOfBirth.errors && DateOfBirth.errors.required">Le champ de la date de naissance est obligatoire</li>
+                                <li *ngIf="(AgentAdress.touched && !AgentAdress.valid) && AgentAdress.errors && AgentAdress.errors.required">L'adresse de domicile de l'agent est obligatoire</li>
+                                <li *ngIf="(AgentEmail.touched && !AgentEmail.valid)">
+                                  <ng-container *ngIf="AgentEmail.errors">
+                                    <ng-container *ngIf="AgentEmail.errors.required">Le champ de l'adresse e-mail est obligatoire</ng-container>
+                                    <ng-container *ngIf="AgentEmail.errors.pattern">Format invalide pour l'adresse e-mail</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="(AgentPhoneNumber.touched && !AgentPhoneNumber.valid)">
+                                  <ng-container *ngIf="AgentPhoneNumber.errors">
+                                    <ng-container *ngIf="AgentPhoneNumber.errors.required">Le champ du numéro de téléphone est obligatoire</ng-container>
+                                    <ng-container *ngIf="AgentPhoneNumber.errors.pattern">Format invalide pour le numéro de téléphone</ng-container>
+                                    <ng-container *ngIf="AgentPhoneNumber.errors.minlength">Le numéro de téléphone doit comporter au moins 10 chiffres</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="(AgentCommerceId.touched && !AgentCommerceId.valid)">
+                                  <ng-container *ngIf="AgentCommerceId.errors">
+                                    <ng-container *ngIf="AgentCommerceId.errors.required">Le champ du registre du commerce est obligatoire</ng-container>
+                                    <ng-container *ngIf="AgentCommerceId.errors.pattern">Format invalide pour le numéro de registre du commerce</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="(AgentPatentNumber.touched && !AgentPatentNumber.valid)">
+                                  <ng-container *ngIf="AgentPatentNumber.errors">
+                                    <ng-container *ngIf="AgentPatentNumber.errors.required">Le champ du numéro de brevet est obligatoire</ng-container>
+                                    <ng-container *ngIf="AgentPatentNumber.errors.pattern">Format invalide pour le numéro de brevet</ng-container>
+                                    <ng-container *ngIf="AgentPatentNumber.errors.minlength">Le numéro de brevet doit comporter au moins 6 chiffres</ng-container>
+                                  </ng-container>
+                                </li>
+                                <li *ngIf="(AgentAddFile.touched && !AgentAddFile.valid) && AgentAddFile.errors && AgentAddFile.errors.required">La justification d'identité est obligatoire</li>
+                              </ul>
+                            </div>
+                          </div>
+                          
+                    </div>
+                    <div class="text-muted pt-3">
+                        <form class="" #AgentAddForm="ngForm"
+                            (ngSubmit)="submitAgentAddForm(AgentAddForm)"
+                            method="POST" enctype="multipart/form-data">
+                            <div class="row py-1">
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.firstName"
+                                            #FirstName="ngModel"
+                                            id="fname"
+                                            name="fname"
+                                            class="form-control"
+                                            placeholder="Entrer votre prénom"
+                                            required
+                                            pattern="[a-zA-Z]+">
+                                        <label for="fname">Prénom</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.lastName"
+                                            #LastName="ngModel"
+                                            id="lname"
+                                            name="lname"
+                                            class="form-control"
+                                            placeholder="Entrez votre nom de famille"
+                                            required
+                                            pattern="[a-zA-Z]+">
+                                        <label for="lname">Nom de famille</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="Id_identification_type"
+                                            [(ngModel)]="agent.identityJustification"
+                                            #IdType="ngModel"
+                                            name="Id_identification_type"
+                                            required>
+                                            <option *ngFor="let IdentType of IdentTypes">{{IdentType}}</option>
+                                        </select>
+                                        <label class="form-control-label px-3">Justification d'identité<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.identityCardNumber"
+                                            name="Id_number"
+                                            #IdCardNumber="ngModel"
+                                            [disabled]="!(IdType.value==='C.I.N')"
+                                            id="Id_number"
+                                            class="form-control"
+                                            placeholder="Ex: DC234556"
+                                            pattern="[A-Z0-9]+"
+                                            minlength="7"
+                                            required>
+                                        <label class="form-control-label px-3">Numéro de carte d'identité<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="date"
+                                            [(ngModel)]="agent.dateOfBirth"
+                                            #DateOfBirth="ngModel"
+                                            id="DateOfBirth"
+                                            name="DateOfBirth"
+                                            class="form-control"
+                                            placeholder="00/00/0000"
+                                            required>
+                                        <label class="form-control-label px-3">Date de naissance<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.homeAddress"
+                                            #AgentAdress="ngModel"
+                                            id="Agentadress"
+                                            name="AgentAdress"
+                                            class="form-control"
+                                            placeholder="Adresse domicile"
+                                            required>
+                                        <label class="form-control-label px-3">Adresse<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.emailAddress"
+                                            #AgentEmail="ngModel"
+                                            id="Agentemail"
+                                            name="AgentEmail"
+                                            placeholder="Ex: john.doe@gmail.com"
+                                            class="form-control"
+                                            required
+                                            pattern="^[a-zA-Z0-9.]+@gmail.com$">
+                                        <label class="form-control-label px-3">Adresse e-mail<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.phoneNumber"
+                                            #AgentPhoneNumber="ngModel"
+                                            id="AgentPhoneNumber"
+                                            name="AgentPhoneNumber"
+                                            placeholder="Ex:+2126000000"
+                                            required
+                                            class="form-control"
+                                            pattern="[0-9+]+"
+                                            minlength="10">
+                                        <label class="form-control-label px-3">Numéro de téléphone<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.commerceregistrySerialNumber"
+                                            #AgentCommerceId="ngModel"
+                                            id="AgentCommerceId"
+                                            name="AgentCommerceId"
+                                            placeholder="Ex: AB56NV98GT43"
+                                            required
+                                            class="form-control"
+                                            pattern="[a-zA-Z0-9]+">
+                                        <label class="form-control-label px-3">Numéro de série du registre du commerce<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="agent.patentNumber"
+                                            #AgentPatentNumber="ngModel"
+                                            id="AgentPatentNumber"
+                                            name="AgentPatentNumber"
+                                            placeholder="Ex: 12539736"
+                                            required
+                                            class="form-control"
+                                            minlength="6"
+                                            pattern="[0-9]+">
+                                        <label class="form-control-label px-3">Numéro de brevet<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="file"
+                                            id="AgentAddFile"
+                                            [(ngModel)]="file"
+                                            #AgentAddFile="ngModel"
+                                            name="AgentAddFile"
+                                            placeholder="tt"
+                                            class="form-control"
+                                            required>
+                                        <label class="form-control-label px-3">Télécharger le fichier d'identité<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text"
+                                            [(ngModel)]="description"
+                                            #AgentFileDescription="ngModel"
+                                            id="AgentFileDescription"
+                                            name="AgentFileDescription"
+                                            class="form-control"
+                                            placeholder="tt">
+                                        <label class="form-control-label px-3">Description du fichier<span class="text-danger"> *</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 py-1">
+                                <button class="btn btn-primary btn-lg" type="submit">Ajouter un agent</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+<!--Main layout-->
